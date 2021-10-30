@@ -1,4 +1,4 @@
-# clinica_dermatologiaDesarrollo de sofware | clínica de dermatología |
+# clinica_dermatologia | Desarrollo de sofware | clínica de dermatología |#
 MISIÓN
  Brindar a nuestros pacientes atención dermatológica oportuna, con calidad y calidez para ayudar a salir de esa carga que tienen como enfermedad.
 
