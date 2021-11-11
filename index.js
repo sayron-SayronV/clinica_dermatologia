@@ -5,11 +5,11 @@ const mysql = require('mysql');  const express = require('express');  var app = 
 app.use(bodyparser.json());  
 // Connection String to Database  
 var mysqlConnection = mysql.createConnection({  
-    host: 'localhost',  
+    host: '127.0.0.1',  
     user : 'root',  
-    password : '1994',   
+    password : '',   
     database : 'db_clinica_eylinlopez',  
-    port:3306,
+    port:3307,
     multipleStatements : true  
 });   
 // To check whether the connection is succeed for Failed while running the project in console.  
@@ -23,6 +23,7 @@ mysqlConnection.connect((err) => {
 });  
 // To Run the server with Port Number  
 app.listen(4000,()=> console.log("Express servidor esta corriendo en el puerto : 4000")); 
+
 //crud method
 //get expedientes de LOS pacientes (CONSULTAS DE TODOS LOS PACIENTES)
 app.get('/GET_EXPEDIENTES',(req,res)=>{  
@@ -280,3 +281,5 @@ app.delete('/DELETECAI',(req,res)=>{
       res.send("Borrado completo");  
   }else{
       console.log(err);}})}); 
+
+
