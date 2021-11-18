@@ -100,7 +100,7 @@ app.get('/GetpacientesEnc',(req,res)=>{
     else  
         console.log(err);})});  
 //Get all Paciente con el encargado 
-app.get('/GetpacientesEnc/:id',(req,res)=>{  
+app.get('/GetpacientesEn/:id',(req,res)=>{  
     mysqlConnection.query('CALL SP_SELECT_PACIENTE_ENCARGADO_DEPARTAMENTO2(?);',[req.params.id],(err,rows,fields)=>{  
     if(!err)    
     res.send(rows);  

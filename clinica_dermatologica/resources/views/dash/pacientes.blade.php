@@ -17,7 +17,7 @@
         </div>
       </div><!-- /.container-fluid -->
 @stop
-{{$i = 1}}
+
 @section('content')
 
             <div class="card">
@@ -55,7 +55,7 @@
                   </thead>
                   
                   <tbody>
-                  
+                  @php($i = 1)
                   @foreach($pacientesArray as $paciente)  
                   
                     
@@ -70,17 +70,27 @@
                       <td>{{ $paciente['NOM_ENCARGADO'] }}</td>
                       <td>{{ $paciente['TEL_ENCARGADO'] }}</td>
                       <td>{{ $paciente['FECHA_REGISTRO'] }}</td>
+
                       <td style="text-align: center;">
                       <a class="btn btn-info btn-sm">Expediente</a>
                       </td>
+
                       <td style="text-align: center;">
                       <a class="btn btn-success btn-sm">Consulta</a>
                       </td>
+
                       <td style="text-align: center;">
-                      <a class="btn btn-warning btn-sm">Editar</a>
+                      <a href="/paciente/edit/{{ $paciente['COD_PACIENTE'] }}"class="btn btn-warning btn-sm">Editar</a>
                       </td>
+
                       <td style="text-align: center;">
-                      <button id="btnAgregarnuevo" class="btn btn-danger btn-sm">Eliminar</button>
+                        <form method="POST" action="/paciente/delete/{{ $paciente['COD_PACIENTE'] }}">
+                            @csrf
+                            @method("DELETE")
+                           <div class="form-item center">
+                           <button type="submit" class="btn-danger btn-sm">Eliminar</button>
+                           </div>
+                        </form>
                       </td>  
                       
                     </tr>
