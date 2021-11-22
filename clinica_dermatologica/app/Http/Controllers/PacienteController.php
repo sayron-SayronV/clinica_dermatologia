@@ -61,8 +61,7 @@ class PacienteController extends Controller
             'PARENTESCO' => $request->get('parentesco_enc'),
         ]);
 
-        return redirect('/paciente');
-
+        return redirect('/paciente')->with('agregado', 'ok');
     }
 
     /**
@@ -85,13 +84,13 @@ class PacienteController extends Controller
     public function edit(Request $request, $id)
     {
         $paciente = $request->id;
-        $response = Http::get('http://localhost:4000/GetpacientesEn/'. $paciente);
+        $response = Http::get('http://localhost:4000/GetpacientesEn/' . $paciente);
         $pacientes = $response->json();
         $pacientesArray = $pacientes[0][0];
 
         //dd($pacientesArray);
 
-      return view('dash.editar_pacientes', compact('pacientesArray'));
+        return view('dash.editar_pacientes', compact('pacientesArray'));
     }
 
     /**
@@ -104,9 +103,10 @@ class PacienteController extends Controller
     public function update(Request $request, $id)
     {
 
+
         $cod_paciente = $request->id;
         $response = Http::put('http://localhost:4000/UpdatePacienteEnc', [
-            'COD_PACIENTE'=>$cod_paciente,
+            'COD_PACIENTE' => $cod_paciente,
             'PRI_NOMBRE' => $request->get('prim_nombre'),
             'SEG_NOMBRE' => $request->get('seg_nombre'),
             'PRI_APELLIDO' => $request->get('prim_apellido'),
@@ -125,12 +125,11 @@ class PacienteController extends Controller
             'PARENTESCO' => $request->get('parentesco_enc'),
             'IDENTIFICACION' => $request->get('num_id_enc'),
             'TELEFONO' => $request->get('tel_enc'),
-            
+
         ]);
 
-       
-        return redirect('/paciente');
 
+        return redirect('/paciente')->with('actualizar', 'ok');
     }
 
     /**
@@ -142,9 +141,9 @@ class PacienteController extends Controller
     public function destroy(Request $request, $id)
     {
         $cod_paciente = $request->id;
-        $response = Http::delete('http://localhost:4000/DELETEpacientesEnc/'. $cod_paciente);
+        $response = Http::delete('http://localhost:4000/DELETEpacientesEnc/' . $cod_paciente);
 
-       
-        return redirect('/paciente');
+
+        return redirect('/paciente')->with('eliminar', 'ok');
     }
 }
