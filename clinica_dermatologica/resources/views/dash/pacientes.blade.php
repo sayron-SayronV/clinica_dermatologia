@@ -20,35 +20,26 @@
 
 @section('content')
 
+
+
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Pacientes</h3>
-    <div class="card-tools">
-      <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-default">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </div>
+    <a class="btn btn-primary btn-sm" href="/add_paciente">Agregar Nuevo</a>
   </div>
+
   <!-- /.card-header -->
   <div class="card-body ">
-    <table class="table table-bordered">
+    <table id="tblpacientes" class="table table-bordered">
       <thead style="background-color: #2E86C1 ;color: white; font-weight:bold;; font-weight:bold;">
         <tr>
           <th style="width: 3%">Nº</th>
           <th>Paciente</th>
           <th style="width: 10%">Número de ID</th>
           <th style="width: 7%">Teléfono</th>
+          <th style="width: 5%">Correo</th>
           <th style="width: 5%">Nombre Encargado</th>
           <th style="width: 5%">Teléfono Encargado</th>
-          <th style="width: 5%">Fecha Registro</th>
-          <th style="width: 5%">Expediente</th>
-          <th style="width: 5%">Nueva Consulta</th>
+          <th style="width: 10%">Fecha Registro</th>
           <th style="width: 5%">Editar</th>
           <th style="width: 5%">Eliminar</th>
         </tr>
@@ -67,17 +58,10 @@
           <td>{{ $paciente['PRI_NOMBRE'] }} {{ $paciente['PRI_APELLIDO'] }} {{ $paciente['SEG_APELLIDO'] }}</td>
           <td>{{ $paciente['NUMERO_ID'] }}</td>
           <td>{{ $paciente['TELEFONO'] }}</td>
+          <td>{{ $paciente['CORREO'] }}</td>
           <td>{{ $paciente['NOM_ENCARGADO'] }}</td>
           <td>{{ $paciente['TEL_ENCARGADO'] }}</td>
-          <td>{{ $paciente['FECHA_REGISTRO'] }}</td>
-
-          <td style="text-align: center;">
-            <a class="btn btn-info btn-sm">Expediente</a>
-          </td>
-
-          <td style="text-align: center;">
-            <a class="btn btn-success btn-sm">Consulta</a>
-          </td>
+          <td>{{ date('d/m/y H:i', strtotime($paciente['FECHA_REGISTRO'])) }}</td>
 
           <td style="text-align: center;">
             <a href="/paciente/edit/{{ $paciente['COD_PACIENTE'] }}" class="btn btn-warning btn-sm">Editar</a>
@@ -101,15 +85,6 @@
     </table>
   </div>
   <!-- /.card-body -->
-  <div class="card-footer clearfix">
-    <ul class="pagination pagination-sm m-0 float-right">
-      <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-    </ul>
-  </div>
 </div>
 <!-- /.card -->
 
@@ -126,6 +101,9 @@
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
 @stop
 
 @section('js')
@@ -133,8 +111,34 @@
 <script>
   console.log('Hi!');
 </script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#tblpacientes').DataTable({
+      "lengthMenu": [
+        [5, 10, 20, 50, -1],
+        [5, 10, 20, 50, 'All']
+      ],
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "zeroRecords": "Nada encontrado - disculpas",
+        "info": "Mostrando la página _PAGE_ de _PAGES_",
+        "infoEmpty": "No records available",
+        "infoFiltered": "(filtrado de _MAX_ registros totales)",
+        "search": "Buscar:",
+        "paginate": {
+          "next": "Siguiente",
+          "previous": "Anterior"
+        }
+      }
+    });
+  });
+</script>
+
 
 @if (session('eliminar') == 'ok')
 <script>

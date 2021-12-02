@@ -248,20 +248,9 @@ return [
         ],
         [
             'text'        => 'Pacientes',
-            'icon'        => 'fas fa-users',
+            'icon'        => 'fas fa-user-friends',
             'label_color' => 'success',
-            'submenu' => [
-                [
-                    'text' => 'Agregar Paciente',
-                    'icon'        => 'fas fa-user-plus',
-                    'url'  => 'add_paciente',
-                ],
-                [
-                    'text' => 'Pacientes',
-                    'icon'        => 'fas fa-user-friends',
-                    'url'  => 'paciente',
-                ],
-            ],
+            'url'  => 'paciente',
         ],
         ['header' => 'account_settings'],
         [
