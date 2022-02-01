@@ -5,11 +5,11 @@ const mysql = require('mysql');  const express = require('express');  var app = 
 app.use(bodyparser.json());  
 // Connection String to Database  
 var mysqlConnection = mysql.createConnection({  
-    host: '127.0.0.1',  
+    host: '40.114.14.26',  
     user : 'root',  
-    password : '',   
+    password : '1994',   
     database : 'db_clinica_eylinlopez',  
-    port:3307,
+    port:3306,
     multipleStatements : true  
 });   
 // To check whether the connection is succeed for Failed while running the project in console.  
